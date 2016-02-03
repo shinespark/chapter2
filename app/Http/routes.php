@@ -64,7 +64,8 @@ Route::get('home', ['middleware' => 'auth', 'uses' => 'HomeController@home']);
 //   POST /user/edit/ユーザーID   ユーザー更新処理
 //   GET  /user/remove/ユーザーID ユーザー削除
 //
-// controllerメソッドはURIの先頭とコントローラーを結びつける。どのルートと結び付けるのか
+// controllerメソッドはURIの先頭とコントローラーを結びつける。
+// どのルートと結び付けるのか
 // コントローラーを確認する必要がある。
 //
 // 暗黙のコントローラー参照 :
@@ -104,3 +105,20 @@ Route::controllers([
 //   http://readouble.com/laravel/5/1/ja/authentication.html#included-routing
 //   http://readouble.com/laravel/5/1/ja/authentication.html#resetting-routing
 //
+Route::get('who', function () {
+    return 'こんにちは' . Request::input('name', '世界') . 'さん';
+});
+
+Route::get('who/{name}', function ($name) {
+    return 'こんにちは' . $name . 'さん';
+});
+
+// 2.26
+Route::get('all', function () {
+    return App\User::all();
+});
+
+
+Route::get('find/{id}', function ($userId) {
+    return App\User::find($userId);
+});
