@@ -122,3 +122,14 @@ Route::get('all', function () {
 Route::get('find/{id}', function ($userId) {
     return App\User::find($userId);
 });
+
+Route::get('find-or-404/{id}', function ($userId) {
+    return App\User::findOrFail($userId);
+});
+
+Route::get('update/{id}', function ($userId) {
+    $user = App\User::findOrFail($userId);
+    $user->name = 'Nomura';
+    $user->save();
+    return $user;
+});
